@@ -14,7 +14,86 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      csv_uploads: {
+        Row: {
+          columns_info: Json | null
+          created_at: string
+          error_message: string | null
+          file_name: string
+          file_path: string
+          file_size: number
+          id: string
+          processing_status: string
+          total_rows: number | null
+          updated_at: string
+          upload_date: string
+          user_id: string
+        }
+        Insert: {
+          columns_info?: Json | null
+          created_at?: string
+          error_message?: string | null
+          file_name: string
+          file_path: string
+          file_size: number
+          id?: string
+          processing_status?: string
+          total_rows?: number | null
+          updated_at?: string
+          upload_date?: string
+          user_id: string
+        }
+        Update: {
+          columns_info?: Json | null
+          created_at?: string
+          error_message?: string | null
+          file_name?: string
+          file_path?: string
+          file_size?: number
+          id?: string
+          processing_status?: string
+          total_rows?: number | null
+          updated_at?: string
+          upload_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ml_training_data: {
+        Row: {
+          created_at: string
+          csv_upload_id: string
+          id: string
+          row_data: Json
+          row_index: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          csv_upload_id: string
+          id?: string
+          row_data: Json
+          row_index: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          csv_upload_id?: string
+          id?: string
+          row_data?: Json
+          row_index?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ml_training_data_csv_upload_id_fkey"
+            columns: ["csv_upload_id"]
+            isOneToOne: false
+            referencedRelation: "csv_uploads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
